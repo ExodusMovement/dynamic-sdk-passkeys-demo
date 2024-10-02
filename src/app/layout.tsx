@@ -10,6 +10,18 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createConfig, WagmiProvider } from "wagmi";
 import { http } from "viem";
 import { mainnet } from "viem/chains";
+import { createWallet } from "@passkeys/core";
+
+/*
+  This registers an EIP-6963 wallet (no `window.ethereum` injection), but the Dynamic SDK doesn't detect it.
+ */
+// createWallet({ providers: { ethereum: true }})
+
+/*
+  This registers an EIP-6963 wallet and injects the provider into `window.ethereum`.
+  The Dynamic SDK detects the Passkeys Wallet as "Injected".
+ */
+// createWallet({ providers: { ethereum: { dangerouslyInjectWindow: true } }})
 
 const inter = Inter({ subsets: ["latin"] });
 
